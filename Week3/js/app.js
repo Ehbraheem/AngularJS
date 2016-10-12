@@ -11,6 +11,7 @@
     
     function NarrowItDownController (MenuSearchService) {
         var narrow = this;
+        narrow.found = [];
         narrow.error = false;
         narrow.searchTerm = '';
         narrow.search = (searchTerm) => {
@@ -28,7 +29,10 @@
                         narrow.found = result;
 //                        return;
                     }
-                narrow.error = true;
+                    else {
+                        narrow.error = true;
+                    }
+                
             })
             .catch((error) => narrow.error = true);
             } 
