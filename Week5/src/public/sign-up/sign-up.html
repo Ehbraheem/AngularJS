@@ -1,0 +1,110 @@
+<div class="container">
+  <h2 id="signUp-title" class="text-center">Sign Up</h2>
+  <fieldset class="row form-group">
+    <legend>Sign Up</legend>
+    <form name='signUpForm' novalidate>
+      <div class="form-group" ng-class="{'has-error has-feedback': signUpForm.firstName.$invalid && !signUpForm.firstName.$pristine }">
+        <label for="firstName" class="col-sm-2 control-label">First Name</label>
+          <div class="col-sm-10">
+              <input type="text" class="form-control" name="firstName" placeholder="Enter First Name"
+                ng-model="$signUpCtrl.user.firstName"
+                required
+                minlength="2"
+                ng-maxlength="10">
+                <span ng-show="signUpForm.firstName.$invalid  && !signUpForm.firstName.$pristine" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true" />
+                <span ng-if="(signUpForm.firstName.$error.minlength || signUpForm.firstName.$error.required) && signUpForm.firstName.$touched" class="help-block">
+                  First Name must be at least 2 characters long
+                </span>
+                <span ng-if="signUpForm.firstName.$error.maxlength && signUpForm.firstName.$touched" class="help-block">
+                  First Name must not be longer than 10 characters
+                </span>
+                <br>
+                  </div>
+      </div>
+
+      <div class="form-group" ng-class="{'has-error has-feedback': signUpForm.lastName.$invalid && !signUpForm.lastName.$pristine }">
+        <label for="lastName" class="col-sm-2 control-label">Last Name</label>
+          <div class="col-sm-10">
+              <input type="text" class="form-control" name="lastName" placeholder="Enter Last Name"
+        ng-model="$signUpCtrl.user.lastName"
+        required
+        minlength="1"
+        ng-maxlength="10">
+        <span ng-show="signUpForm.lastName.$invalid  && !signUpForm.lastName.$pristine" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true" />
+        <span ng-if="(signUpForm.lastName.$error.minlength || signUpForm.lastName.$error.required) && signUpForm.lastName.$touched" class="help-block">
+          Last Name must be at least 2 characters long
+        </span>
+        <span ng-if="signUpForm.lastName.$error.maxlength && signUpForm.lastName.$touched" class="help-block">
+          First Name must not be longer than 10 characters
+        </span>
+        <br>
+          </div>
+        
+      </div>
+
+      <div class="form-group" ng-class="{'has-error has-feedback': signUpForm.email.$invalid && !signUpForm.email.$pristine }">
+        <label for="email" class="col-sm-2 control-label">Email</label>
+          <div class="col-sm-10">
+        <input type="email" class="form-control" name="email" placeholder="Email"
+        ng-model="$signUpCtrl.user.email"
+        required>
+        <span ng-if="signUpForm.email.$invalid && signUpForm.email.$touched">
+          Must be a valid email address: handle@domain format
+        </span>
+        <br>
+        </div>
+      </div>
+
+      <div class="form-group" ng-class="{'has-error has-feedback': signUpForm.email.$invalid && !signUpForm.email.$pristine }">
+        <label for="phone" class="col-sm-2 control-label">Phone</label>
+          <div class="col-sm-10">
+        <input type="text" class="form-control" name="phone" placeholder="Phone ###-###-####"
+        ng-model="$signUpCtrl.user.phone"
+        pattern="(\d{3})-(\d{3})-(\d{4})">
+        <span ng-if="signUpForm.phone.$invalid && signUpForm.phone.$touched">
+          Phone must be in the format ###-###-####.
+        </span>
+        <br>
+        </div>
+      </div>
+
+      <div class="form-group" ng-class="{'has-error has-feedback': signUpForm.favoriteDish.$invalid && !signUpForm.favoriteDish.$pristine && $signUpCtrl.validateDish()}">
+        <label for="favoriteDish" class="col-sm-2">Favorite Dish</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="favoriteDish" placeholder="Pick your favorite Dish"
+        ng-model="$signUpCtrl.user.favoriteDish" minlength="2"
+        ng-maxlength="2">
+          
+          <span ng-show="signUpForm.favoriteDish.$invalid  && !signUpForm.favoriteDish.$pristine" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true" />
+        <span ng-if="(signUpForm.favoriteDish.$error.minlength || signUpForm.favoriteDish.$error.required) && signUpForm.favoriteDish.$touched" class="help-block">
+          Favorite dish must be 2 characters long
+        </span>
+        <span ng-if="signUpForm.favoriteDish.$error.maxlength && signUpForm.favoriteDish.$touched" class="help-block">
+          Favorite dish must be in form 'A1', 'L3'
+        </span>
+        <br>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="alert alert-danger" role="alert" ng-if="$signUpCtrl.error">
+            Make sure you capitalize the alphabet in your favorite dish
+        </div>
+        <div class="alert alert-success" role="alert" ng-if="$signUpCtrl.success" ng-init="$signUpCtrl.redirect()">
+          Your information has been saved.
+        </div>
+        <br>
+      </div>
+        
+        <div class="form-group">
+            <div class="col-sm-offset-2">
+                <button class="btn btn-lg btn-primary"
+                  ng-disabled="signUpForm.$invalid"
+                  ng-click="$signUpCtrl.submit()">
+                  Submit
+                </button>
+            </div>
+        </div>
+  </form>
+</fieldset>
+</div>
